@@ -12,17 +12,13 @@ $(function () {
 function refresh(){
 
     $("#list-body-2").append('<tr class="vertical"><td colspan="9"><i class="fa-light fa-spinner-third fa-spin icon-center color-secondary" aria-hidden="true"></i></td></tr>')
-    let shop = $("#globalShopName").val()
-    let token = $("#globalToken").val()
-    let apikey = $("#globalApikey").val() 
 
     $.ajax({
         type: "POST",
-        url: "https://pluginssandbox.smsmasivos.com.mx/wp/automation/reports/get",
+        url: ajax_object.ajaxurl,
         data: {
-            shop:shop,
-            apikey:apikey,
-            token:token,
+            action: 'sms_proxy_reports_get',
+            nonce: ajax_object.nonce,
             rows:$('#load_info').attr('data-id')
         },
         dataType: "json",

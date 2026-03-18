@@ -155,7 +155,7 @@
             delete_option('sms_plugin_apikey');
 
             if($token && $shop){
-    
+
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -177,7 +177,59 @@
 
                 curl_exec($curl);
                 curl_close($curl);
-                    
+
             }
+        }
+
+        public static function verify_ajax_request($nonce_action = 'my-ajax-nonce'){
+            $nonce = isset($_REQUEST['nonce']) ? sanitize_text_field($_REQUEST['nonce']) : '';
+            if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+                echo json_encode(["success" => false, "message" => "Nonce inválido"]);
+                die();
+            }
+            if ( ! current_user_can( 'manage_options' ) ) {
+                echo json_encode(["success" => false, "message" => "Sin permisos"]);
+                die();
+            }
+            return true;
+        }
+
+        public static function proxy_request($endpoint, $data = [], $include_credentials = true){
+            if($include_credentials){
+                $apikey = get_option('sms_plugin_apikey', null);
+                $token  = get_option('sms_plugin_token', null);
+                $shop   = get_option('home', null);
+
+                if($apikey !== null) $data['apikey'] = $apikey;
+                if($token !== null)  $data['token']  = $token;
+                if($shop !== null)   $data['shop']   = $shop;
+            }
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL            => "https://pluginssandbox.smsmasivos.com.mx" . $endpoint,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING       => "",
+                CURLOPT_MAXREDIRS      => 10,
+                CURLOPT_TIMEOUT        => 30,
+                CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+                CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_SSL_VERIFYHOST => 2,
+                CURLOPT_CUSTOMREQUEST  => "POST",
+                CURLOPT_POSTFIELDS     => http_build_query($data),
+                CURLOPT_HTTPHEADER     => array(
+                    "Content-Type: application/x-www-form-urlencoded",
+                    "cache-control: no-cache",
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            $err      = curl_error($curl);
+            curl_close($curl);
+
+            if($err){
+                return json_encode(["success" => false, "message" => "Error de conexión: " . $err]);
+            }
+            return $response;
         }
     }

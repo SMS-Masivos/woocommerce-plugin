@@ -5,7 +5,6 @@ let active_keys = true;
 
 $(function () {
    
-    let apitoken = $("#globalApikey").val();   
     let json_conf = null
     let csrfToken = null
     let render_last = null
@@ -14,7 +13,6 @@ $(function () {
     let credits   = null
     let close = true
     let close_ws = true
-    let shop = $("#globalShopName").val();   ;
     let global_list = []
     
     load()
@@ -289,10 +287,6 @@ $(function () {
     $(".create-automation").click(function (e) { 
         e.preventDefault();
     
-        let shop = $("#globalShopName").val();
-        let token = $("#globalToken").val();
-        let apikey = $("#globalApikey").val();
-    
         let name = $("#automation_name").val();
         let type = $("#list-type").val();
         let recipient = $("#list-recipient").val();
@@ -336,28 +330,28 @@ $(function () {
     
                                             btn.prop("disabled", true).html('<i class="fa-light fa-spinner-third fa-spin icon-center color-secondary" aria-hidden="true"></i> Cargando...');
     
-                                            let url_request = "https://pluginssandbox.smsmasivos.com.mx/wp/automation/create";
+                                            let isEdit = btn.attr("data-edit") == "1";
+                                            let ajax_action = "sms_proxy_automation_create";
                                             let automationid = btn.attr("data-id");
-    
-                                            if (btn.attr("data-edit") == "1") {
-                                                url_request = "https://pluginssandbox.smsmasivos.com.mx/wp/automation/edit_general";
+
+                                            if (isEdit) {
+                                                ajax_action = "sms_proxy_automation_edit_general";
                                                 $(".create-automation").attr("data-edit", 0).attr("data-id", 0);
                                                 $("#list-type").attr("disabled", false).niceSelect('update');
                                             }
-    
+
                                             $.ajax({
                                                 type: "POST",
-                                                url: url_request,
+                                                url: ajax_object.ajaxurl,
                                                 dataType: "json",
                                                 data: {
-                                                    shop: shop,
+                                                    action: ajax_action,
+                                                    nonce: ajax_object.nonce,
                                                     name: name,
                                                     type: type,
                                                     recipient: recipient,
                                                     text: text.replace(/\s+/g, ' ').replace(/ ,+/g, ','),
                                                     text_ws: text_ws,
-                                                    apikey: apikey,
-                                                    token: token,
                                                     lapse: lapse,
                                                     delay: delay,
                                                     limit: limit,
@@ -372,7 +366,7 @@ $(function () {
                                                         $(".totype").click();
                                                         $("#automation_name").val("");
                                                         present_msg = null;
-                                                        if (url_request === "https://pluginssandbox.smsmasivos.com.mx/wp/automation/edit_general") {
+                                                        if (isEdit) {
                                                             showToast("La automatización se actualizó correctamente.", "success");
                                                         } else {
                                                             showToast("La automatización se creó correctamente.", "success");
@@ -383,7 +377,7 @@ $(function () {
                                                             data: {
                                                                 action: 'sms_set_automations',
                                                                 list: list,
-                                                                nonce: $('#globalNonce').val(),
+                                                                nonce: ajax_object.nonce,
                                                             },
                                                             dataType: "JSON",
                                                             success: function (data) {
@@ -837,9 +831,9 @@ $(function () {
           useremail = calcMD5(useremail).toLowerCase().trim()
           $.ajax({
             beforeSend: () => { btnLogin.html('<i class="fa-light fa-spinner-third fa-spin icon-center color-secondary" aria-hidden="true"></i> Procesando ...').prop("disabled", true).css("opacity", 0.5); },
-            url: "https://pluginssandbox.smsmasivos.com.mx/wp/login",
+            url: ajax_object.ajaxurl,
             type: "POST",
-            data: { user: useremail, pass: userpass, shop: shop, token: $("#globalToken").val()},
+            data: { action: 'sms_proxy_login', nonce: ajax_object.nonce, user: useremail, pass: userpass},
             dataType: "json",
             success: function (response) {
               btnLogin.html('Inicia sesión').prop("disabled", false).css("opacity", 1);
@@ -875,15 +869,12 @@ $(function () {
                                     data : {
                                         action : 'sms_set_apikey',
                                         apikey : response.apikey,
-                                        nonce: $('#globalNonce').val(),
+                                        nonce: ajax_object.nonce,
                                         cs:res.data.consumer_secret,
                                         ck:res.data.consumer_key,
-                                        shop:$("#globalShopName").val(),
-                                        token:$("#globalToken").val(),
                                     },
                                     dataType: "JSON",
                                     success: async function (data) {
-                                        $("#globalApikey").val(response.apikey)
                                         await refresh()
                                     },error: function (error){
                                         showToast("Algo salio mal, Intenta más tarde. code: LG001",'error')
@@ -910,13 +901,12 @@ $(function () {
                         data : {
                             action : 'sms_set_apikey',
                             apikey : response.apikey,
-                            nonce: $('#globalNonce').val(),
+                            nonce: ajax_object.nonce,
                             cs:null,
                             ck:null
                         },
                         dataType: "JSON",
                         success: async function (data) {
-                            $("#globalApikey").val(response.apikey)
                             await refresh()
                         },error: function (error){
                             showToast("Algo salio mal, Intenta más tarde. code: LG003",'error')
@@ -955,17 +945,16 @@ $(function () {
         }
 
         $.ajax({
-            url: 'https://pluginssandbox.smsmasivos.com.mx/wp/set',
+            url: ajax_object.ajaxurl,
             type:'POST',
-            datatype: 'json',
-            data : { 
-                shop:$("#globalShopName").val(),
-                apikey:$("#globalApikey").val(),
-                token:$("#globalToken").val(),
+            dataType: 'json',
+            data : {
+                action: 'sms_proxy_wp_set',
+                nonce: ajax_object.nonce,
                 country:country,
                 number:number,
                 last_credits:last_credits,
-                sync_agenda: sync_agenda  
+                sync_agenda: sync_agenda
             },
             success: (response)=>{
                 if (response.success)
@@ -984,8 +973,8 @@ function load(){
 
     $.ajax({
         type: "POST",
-        url: "https://pluginssandbox.smsmasivos.com.mx/wp",
-        data: {shop: $("#globalShopName").val(),apikey:$("#globalApikey").val(),token:$("#globalToken").val()},
+        url: ajax_object.ajaxurl,
+        data: {action: 'sms_proxy_wp_load', nonce: ajax_object.nonce},
         dataType: "JSON",
         success: async function (response) {
             if(response.success){
@@ -1028,7 +1017,7 @@ function load(){
                         data : {
                             action : 'sms_set_automations',
                             list: list,
-                            nonce: $('#globalNonce').val(),
+                            nonce: ajax_object.nonce,
                         },
                         dataType: "JSON",
                         success: function (data) {
@@ -1068,11 +1057,10 @@ function refresh() {
 
         $.ajax({
             type: "POST",
-            url: "https://pluginssandbox.smsmasivos.com.mx/wp/automation/get",
-            data: { 
-                shop: $("#globalShopName").val(),
-                apikey: $("#globalApikey").val(),
-                token: $("#globalToken").val()
+            url: ajax_object.ajaxurl,
+            data: {
+                action: 'sms_proxy_automation_get',
+                nonce: ajax_object.nonce
             },
             dataType: "JSON",
             success: function (response) {
@@ -1469,24 +1457,19 @@ function editmsg(id,msg){
 }
 
 function autoedit(id,cmd,options = null,type = null){
-    
+
     let e = null
-    let shop = $("#globalShopName").val()
-    let token = $("#globalToken").val()
-    let apikey = $("#globalApikey").val() 
 
     if(cmd == "status"){
 
         e = $(`#id-auto-${id} input`)
         if(type == "2" && e.prop('checked'))
-            showToast("Asegúrate de solicitar el número de teléfono de tus clientes al momento de registrarse para hacer efectiva la automatización",'success') 
+            showToast("Asegúrate de solicitar el número de teléfono de tus clientes al momento de registrarse para hacer efectiva la automatización",'success')
 
         options = e.prop('checked')
         e.prop("disabled",true).addClass('opa5')
-       
 
         if(type == "6" &&  e.prop('checked') == true && $("#isextensionactive").val() != "1"){
-
 
               swal({
                 title: "!Atención!",
@@ -1506,36 +1489,36 @@ function autoedit(id,cmd,options = null,type = null){
                 })
         }
 
+    } else if(cmd == "msg"){
+
+        e = $("#btn_msg_automation")
+        e.prop("disabled",true)
+
     }
-
-    let data = {
-        id:id,
-        apikey:apikey,
-        token:token,
-        shop:shop,
-        options:options,
-    };
-
 
     $.ajax({
         type: "POST",
-        url: "https://pluginssandbox.smsmasivos.com.mx/wp/automation/edit",
+        url: ajax_object.ajaxurl,
         dataType: "json",
-        data:data,
+        data: {
+            action:  'sms_autoedit_automation',
+            nonce:   ajax_object.nonce,
+            id:      id,
+            options: options,
+        },
         success: function (response) {
-            e.prop("disabled",false)
+            if(e) e.prop("disabled",false).removeClass('opa5')
             if(!response.success){
-                $(`#id-auto-${id} input`).prop('checked',!options)
-                swal("¡Atención!",response.message,"warning");  
-                e.prop("disabled",false).removeClass('opa5')
+                if(cmd == "status") $(`#id-auto-${id} input`).prop('checked',!options)
+                showToast(response.message || "Algo salió mal, intenta más tarde.",'warning')
             }else{
 
+                showToast("Automatización actualizada correctamente",'success')
 
                 var list = new Array();
                 $('#list-body tr').each(function() {
                     list.push({"type":$(this).attr("data-type"), "status": $(`#${this.id} td label input`).prop('checked') == true ? 1 : 0});
                 });
-
 
                 $.ajax({
                     type: "POST",
@@ -1543,7 +1526,7 @@ function autoedit(id,cmd,options = null,type = null){
                     data : {
                         action : 'sms_set_automations',
                         list: list,
-                        nonce: $('#globalNonce').val(),
+                        nonce: ajax_object.nonce,
                     },
                     dataType: "JSON",
                     success: function (data) {
@@ -1554,8 +1537,8 @@ function autoedit(id,cmd,options = null,type = null){
 
         },
         error:function(error){
-            e.prop("disabled",false).removeClass('opa5')
-            showToast("Algo salio mal, Intenta más tarde. code: ED001",'error')
+            if(e) e.prop("disabled",false).removeClass('opa5')
+            showToast("Algo salió mal, intenta más tarde. code: ED001",'error')
         }
     });
 }
@@ -1610,10 +1593,6 @@ function outsideClick(event, notelem)	{
 
 function delete_automation(id,type){
 
-    let shop = $("#globalShopName").val()
-    let token = $("#globalToken").val()
-    let apikey = $("#globalApikey").val() 
-
     swal({
         title: "!Atención!",
         text: 'Estas a punto de eliminar esta automatizacion. ¿Estas seguro?',
@@ -1629,11 +1608,10 @@ function delete_automation(id,type){
     
             $.ajax({
                 type: "POST",
-                url: "https://pluginssandbox.smsmasivos.com.mx/wp/automation/delete",
+                url: ajax_object.ajaxurl,
                 data: {
-                    shop:shop,
-                    apikey:apikey,
-                    token:token,
+                    action: 'sms_proxy_automation_delete',
+                    nonce: ajax_object.nonce,
                     id:id,
                     type:type
                 },
@@ -1641,18 +1619,19 @@ function delete_automation(id,type){
                 success: function (response) {
                     if(response.success){
                         $(`#id-auto-${id}`).remove()
+                        showToast("Automatización eliminada correctamente",'success')
                         var list = new Array();
                         $('#list-body tr').each(function() {
                             list.push({"type":$(this).attr("data-type"), "status": $(`#${this.id} td label input`).prop('checked') == true ? 1 : 0});
                         });
-    
+
                         $.ajax({
                             type: "POST",
                             url: ajax_object.ajaxurl,
                             data : {
                                 action : 'sms_set_automations',
                                 list: list,
-                                nonce: $('#globalNonce').val(),
+                                nonce: ajax_object.nonce,
                             },
                             dataType: "JSON",
                             success: function (data) {
@@ -1673,11 +1652,10 @@ function check_whatsapp_instance_status(){
    
     $.ajax({
         type: "POST",
-        url: "https://pluginssandbox.smsmasivos.com.mx/whatsapp/instances/check",
+        url: ajax_object.ajaxurl,
         data: {
-            shop: $("#globalShopName").val(),
-            apikey:$("#globalApikey").val(),
-            token:$("#globalToken").val()
+            action: 'sms_proxy_whatsapp_check',
+            nonce: ajax_object.nonce
         },
         dataType: "json",
         success: function (response) {
@@ -1726,8 +1704,8 @@ function edit_send_method(id){
           if (isConfirm){
             $.ajax({
                 type: "POST",
-                url: "/whatsapp/instances/edit",
-                data: {id:id,status:status,shop:shop},
+                url: ajax_object.ajaxurl,
+                data: {action: 'sms_proxy_whatsapp_edit', nonce: ajax_object.nonce, id:id, status:status},
                 dataType: "json",
                 success: function (response) {
                     if (response.status == 200) {

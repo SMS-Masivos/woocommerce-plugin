@@ -1,7 +1,3 @@
-<input id="globalShopName" name="globalShopName" type="hidden" value="<?=get_option('home')?>" readonly>
-<input id="globalApikey" name="globalShopName" type="hidden" value="<?=get_option('sms_plugin_apikey')?>" readonly>
-<input id="globalToken" name="globalShopName" type="hidden" value="<?=get_option('sms_plugin_token')?>" readonly>
-
 <div id="global_container">
 <div id="revenue" class="m100">
       <div class="report">

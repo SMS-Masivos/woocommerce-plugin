@@ -1,7 +1,3 @@
-<input id="globalShopName" name="globalShopName" type="hidden" value="<?php echo esc_attr(get_option('home')); ?>" readonly>
-<input id="globalApikey" name="globalApikey" type="hidden" value="<?php echo esc_attr(get_option('sms_plugin_apikey')); ?>" readonly>
-<input id="globalToken" name="globalToken" type="hidden" value="<?php echo esc_attr(get_option('sms_plugin_token')); ?>" readonly>
-<input id="globalNonce" name="globalNonce" type="hidden" value="<?php echo esc_attr(wp_create_nonce( 'my-ajax-nonce' )); ?>" readonly>
 <input id="userstatus" name="userstatus" type="hidden" value="<?php $user_meta = get_userdata(1); echo esc_attr($user_meta->roles[0]); ?>" readonly>
 
 
@@ -11,17 +7,18 @@
         <div id="settings" class="m100">
             <div class="classic whatsapp-box" >
                 <div class="box-apikey">
-                    <span class="whatsapp-status w2">Desactivado &nbsp; <i class="fas fa-check-circle"></i> </span>
+                    <span class="whatsapp-status w2">Sin vincular &nbsp; <i class="fas fa-unlink"></i> </span>
                     <h2>Envío por WhatsApp</h2>
                     <hr>
-                    <p style="font-size:14px"> Conecta tu propio número de WhatsApp escaneando un código QR, similar a como lo haces con WhatsApp Web. Con eso, tu tienda puede enviar mensajes automáticos usando tu número.
+                    <p style="font-size:14px"> Conecta tu propio número de WhatsApp escaneando un código QR similar a como lo haces con WhatsApp Web, con eso tu tienda puede enviar mensajes automáticos usando tu número.
                     <br><br>
-                    Conectar tu número es muy sencillo. Solo tienes que ingresar a tu panel de SMS Masivos, dirigirte a la sección "Conectar WhatsApp" y seguir nuestra guía de configuración.
+                    Conectar tu número es muy sencillo solo tienes que ingresar a tu panel SMS Masivos en la sección "Conectar WhatsApp" y seguir nuestra guía de configuración.
                     </p>
-                    
+
                     <div id="instances-container">
                     <label for="list-instances">Selecciona tu instancia</label>
                     <select id="list-instances" class="wide font-whatsapp">
+                        <option disabled selected>Selecciona una instancia</option>
                     </select>
                     </div>
 
@@ -29,8 +26,8 @@
 
                     <div class="modal-footer" style="border:none">
                         <br>
-                        <a class="btn btn-outline-danger d-none" id="remove_whatsapp_intance">Detener envío por WhatsApp</a>
-                        <a class="btn btn-set" id="set_whatsapp_intance"> Activar</a>
+                        <a class="btn btn-outline-danger d-none" id="remove_whatsapp_intance">Desvincular instancia</a>
+                        <a class="btn btn-set" id="set_whatsapp_intance"> Vincular instancia</a>
                     </div>
 
                 </div>

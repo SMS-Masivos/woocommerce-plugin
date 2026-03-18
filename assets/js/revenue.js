@@ -108,18 +108,13 @@ var grafica_clientes = new Chart(ctx2, {
 
 function refresh(){
 
-let shop = $("#globalShopName").val()
-let token = $("#globalToken").val()
-let apikey = $("#globalApikey").val() 
-
 $.ajax({
-    url: "https://pluginssandbox.smsmasivos.com.mx/wp/automation/revenue/get",
+    url: ajax_object.ajaxurl,
     type: "POST",
     dataType: "json",
     data: {
-        shop:shop,
-        apikey:apikey,
-        token: token
+        action: 'sms_proxy_revenue_get',
+        nonce: ajax_object.nonce
     },
     success: function (response) {
 

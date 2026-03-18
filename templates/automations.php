@@ -1,7 +1,3 @@
-<input id="globalShopName" name="globalShopName" type="hidden" value="<?php echo esc_attr(get_option('home')); ?>" readonly>
-<input id="globalApikey" name="globalApikey" type="hidden" value="<?php echo esc_attr(get_option('sms_plugin_apikey')); ?>" readonly>
-<input id="globalToken" name="globalToken" type="hidden" value="<?php echo esc_attr(get_option('sms_plugin_token')); ?>" readonly>
-<input id="globalNonce" name="globalNonce" type="hidden" value="<?php echo esc_attr(wp_create_nonce( 'my-ajax-nonce' )); ?>" readonly>
 <input id="globalNonce_apikey" name="globalNonce_apikey" type="hidden" value="<?php echo esc_attr(wp_create_nonce( 'update-api-key' )); ?>" readonly>
 <input id="userstatus" name="userstatus" type="hidden" value="<?php $user_meta = get_userdata(1); echo esc_attr($user_meta->roles[0]); ?>" readonly>
 <input id="isextensionactive" type="hidden" value="<?php echo esc_attr(is_plugin_active('woocommerce-abandoned-cart/woocommerce-ac.php')); ?>" readonly>
