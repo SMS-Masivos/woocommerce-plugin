@@ -4,7 +4,7 @@
 * Plugin Name: SMS Masivos
 * Plugin URI: https://app.smsmasivos.com.mx/api
 * Description: Plugin de envio de mensajes SMS y WhatsApp para WooCommerce integrado con la plataforma SMS Masivos.
-* Version: 6.0.3
+* Version: 6.0.2
 * Author: SMS Masivos / Erick González O.
 * Author URI: https://www.smsmasivos.com.mx/
 * Developer: SMSMASIVOS / Erick González O.
