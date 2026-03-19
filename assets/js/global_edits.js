@@ -1,6 +1,6 @@
 docReady(function() {
     let url = window.location.href
-    if(url.indexOf("/wp-admin/post.php?post=") !== -1 && url.indexOf("action=edit") !== -1){
+    if(url.indexOf("action=edit") !== -1){
         let e = document.getElementById('woocommerce-order-data')
         let sms = document.getElementById('sms-plugin-container')
 

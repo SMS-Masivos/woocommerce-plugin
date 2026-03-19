@@ -4,7 +4,7 @@
 * Plugin Name: SMS Masivos
 * Plugin URI: https://app.smsmasivos.com.mx/api
 * Description: Nuevo diseño de nuestro PlugIn de envío de mensajes para wordpress 5.4.3
-* Version: 5.4.3
+* Version: 6.0.0
 * Author: SMS Masivos / Erick González O.
 * Author URI: https://www.smsmasivos.com.mx/
 * Developer: SMSMASIVOS / Erick González O.
@@ -45,7 +45,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         register_deactivation_hook(__FILE__,array('SmsDeactivate','deactivate'));
 
         $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-            'https://gitlab.com/e.gonzalez/plug-in_sms_masivos',
+            'https://github.com/SMS-Masivos/woocommerce-plugin',
             __FILE__,
             SMS_PLUGIN
         );
