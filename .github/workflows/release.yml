@@ -30,10 +30,10 @@ jobs:
             --exclude='README.md' \
             --exclude='.DS_Store' \
             ./ sms-masivos/
-          zip -r sms-masivos-${{ steps.version.outputs.VERSION }}.zip sms-masivos/
+          zip -r sms-masivos.zip sms-masivos/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: sms-masivos-${{ steps.version.outputs.VERSION }}.zip
+          files: sms-masivos.zip
           generate_release_notes: true
