@@ -1,9 +1,9 @@
 <?php 
 
-/** 
+/**
 * Plugin Name: SMS Masivos
 * Plugin URI: https://app.smsmasivos.com.mx/api
-* Description: Nuevo diseño de nuestro PlugIn de envío de mensajes para wordpress 5.4.3
+* Description: Plugin de envio de mensajes SMS y WhatsApp para WooCommerce integrado con la plataforma SMS Masivos.
 * Version: 6.0.2
 * Author: SMS Masivos / Erick González O.
 * Author URI: https://www.smsmasivos.com.mx/
@@ -12,10 +12,11 @@
 * Text Domain: woocommerce-extension
 * Domain Path: /languages
 *
+* Requires at least: 4.4
+* Tested up to: 6.7
+* Requires PHP: 7.2
 * WC requires at least: 3.5
-* WordPress 4.4+.
 *
-* Copyright: © 2009-2022 WooCommerce.
 * License: GNU General Public License v3.0
 * License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
