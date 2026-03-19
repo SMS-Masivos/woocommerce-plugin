@@ -4,7 +4,7 @@
 * Plugin Name: SMS Masivos
 * Plugin URI: https://app.smsmasivos.com.mx/api
 * Description: Nuevo diseño de nuestro PlugIn de envío de mensajes para wordpress 5.4.3
-* Version: 6.0.0
+* Version: 6.0.1
 * Author: SMS Masivos / Erick González O.
 * Author URI: https://www.smsmasivos.com.mx/
 * Developer: SMSMASIVOS / Erick González O.

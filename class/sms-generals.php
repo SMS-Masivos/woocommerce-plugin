@@ -26,7 +26,7 @@
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://pluginssandbox.smsmasivos.com.mx/wp/automation/endpoint",
+                    CURLOPT_URL => "https://plugins.smsmasivos.com.mx/wp/automation/endpoint",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
@@ -80,7 +80,7 @@
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://pluginssandbox.smsmasivos.com.mx/wp/automation/endpoint",
+                    CURLOPT_URL => "https://plugins.smsmasivos.com.mx/wp/automation/endpoint",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
@@ -120,7 +120,7 @@
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://pluginssandbox.smsmasivos.com.mx/wp/automation/credentials",
+                CURLOPT_URL => "https://plugins.smsmasivos.com.mx/wp/automation/credentials",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -159,7 +159,7 @@
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://pluginssandbox.smsmasivos.com.mx/wp/reset",
+                CURLOPT_URL => "https://plugins.smsmasivos.com.mx/wp/reset",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -207,7 +207,7 @@
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL            => "https://pluginssandbox.smsmasivos.com.mx" . $endpoint,
+                CURLOPT_URL            => "https://plugins.smsmasivos.com.mx" . $endpoint,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING       => "",
                 CURLOPT_MAXREDIRS      => 10,
