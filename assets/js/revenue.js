@@ -75,28 +75,21 @@
             _revenue.createChart('grafica-clientes', '# clientes alcanzados', data, labels, 'rgba(210, 218, 226, 0.78)')
         },
 
-        createChart: (canvasId, label, data, labels, color) => {
-            let ctx = document.getElementById(canvasId)
-            return new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: label,
-                        data: data,
-                        backgroundColor: Array(6).fill(color),
-                        borderColor: Array(6).fill(color),
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: { beginAtZero: true }
-                        }]
-                    }
-                }
-            })
+        createChart: (containerId, label, data, labels, color) => {
+            let options = {
+                chart: { type: 'area', height: 250, toolbar: { show: false }, animations: { enabled: true } },
+                series: [{ name: label, data: data }],
+                xaxis: { categories: labels, labels: { style: { fontSize: '12px' } } },
+                fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.45, opacityTo: 0.05 } },
+                colors: [color],
+                stroke: { curve: 'smooth', width: 2 },
+                dataLabels: { enabled: false },
+                tooltip: { y: { formatter: val => val } },
+                grid: { borderColor: '#f0f0f0', strokeDashArray: 4 }
+            }
+            let chart = new ApexCharts(document.getElementById(containerId), options)
+            chart.render()
+            return chart
         },
 
         renderIndicator: (selector, current, previous) => {
