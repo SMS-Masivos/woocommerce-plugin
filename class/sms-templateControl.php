@@ -4,11 +4,7 @@
         {
             self::Globals();
             wp_enqueue_script( 'sms_md5', SMS_PLUGIN_URL.'assets/js/md5.js');
-            wp_enqueue_script( 'sms_automations', SMS_PLUGIN_URL.'assets/js/automations.js');
-            wp_localize_script( 'sms_automations', 'ajax_object', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'my-ajax-nonce' ),
-            ));
+            wp_enqueue_script( 'sms_automations', SMS_PLUGIN_URL.'assets/js/automations.js', array('sms_request'));
 
             wp_enqueue_script( 'override', SMS_PLUGIN_URL.'assets/js/override.js');
             return require_once( SMS_PLUGIN_PATH."/templates/automations.php" );
@@ -17,33 +13,21 @@
         public static function Revenue()
         {
             self::Globals();
-            wp_enqueue_script( 'sms_revenue', SMS_PLUGIN_URL.'assets/js/revenue.js');
-            wp_localize_script( 'sms_revenue', 'ajax_object', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'my-ajax-nonce' ),
-            ));
+            wp_enqueue_script( 'sms_revenue', SMS_PLUGIN_URL.'assets/js/revenue.js', array('sms_request'));
             return require_once( SMS_PLUGIN_PATH."/templates/revenue.php" );
         }
 
         public static function Reports()
         {
             self::Globals();
-            wp_enqueue_script( 'sms_informes', SMS_PLUGIN_URL.'assets/js/informes.js');
-            wp_localize_script( 'sms_informes', 'ajax_object', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'my-ajax-nonce' ),
-            ));
+            wp_enqueue_script( 'sms_informes', SMS_PLUGIN_URL.'assets/js/informes.js', array('sms_request'));
             return require_once( SMS_PLUGIN_PATH."/templates/reports.php" );
         }
 
         public static function GlobalSettings()
         {
             self::Globals();
-            wp_enqueue_script( 'sms_settings', SMS_PLUGIN_URL.'assets/js/settings.js');
-            wp_localize_script( 'sms_settings', 'ajax_object', array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'my-ajax-nonce' ),
-            ));
+            wp_enqueue_script( 'sms_settings', SMS_PLUGIN_URL.'assets/js/settings.js', array('sms_request'));
             return require_once( SMS_PLUGIN_PATH."/templates/globalsettings.php" );
         }
 
@@ -76,7 +60,13 @@
             wp_enqueue_script( 'sms_chart_js', SMS_PLUGIN_URL.'assets/js/chart.js');
             wp_enqueue_style( 'jquerytoastcss', SMS_PLUGIN_URL.'assets/css/jquery.toast.css');
             wp_enqueue_script( 'jquerytoast', SMS_PLUGIN_URL.'assets/js/jquery.toast.js');
-            
+            wp_enqueue_script( 'sms_general', SMS_PLUGIN_URL.'assets/js/sms-general.js', array('jquerytoast'));
+            wp_enqueue_script( 'sms_request', SMS_PLUGIN_URL.'assets/js/sms-request.js', array('sms_general'));
+            wp_localize_script( 'sms_request', 'ajax_object', array(
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'my-ajax-nonce' ),
+            ));
+
             return;
         }
 

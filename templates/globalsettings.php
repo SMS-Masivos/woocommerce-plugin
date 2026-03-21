@@ -1,7 +1,28 @@
 <input id="userstatus" name="userstatus" type="hidden" value="<?php $user_meta = get_userdata(1); echo esc_attr($user_meta->roles[0]); ?>" readonly>
 
+<?php include SMS_PLUGIN_PATH . '/templates/skeleton.php'; ?>
 
-<div id="global_container" >
+<div id="sms-skeleton" class="sms-skeleton-wrap" style="margin-top:75px;margin-left:100px;margin-right:100px;padding:20px;">
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div class="sms-sk" style="width:120px;height:24px;border-radius:20px;"></div>
+        </div>
+        <div class="sms-sk" style="width:180px;height:24px;margin-bottom:12px;"></div>
+        <div style="border-top:1px solid #f0f0f0;padding-top:16px;margin-bottom:16px;">
+            <div class="sms-sk" style="width:100%;height:14px;margin-bottom:8px;"></div>
+            <div class="sms-sk" style="width:90%;height:14px;margin-bottom:8px;"></div>
+            <div class="sms-sk" style="width:70%;height:14px;margin-bottom:20px;"></div>
+        </div>
+        <div class="sms-sk" style="width:140px;height:12px;margin-bottom:8px;"></div>
+        <div class="sms-sk" style="width:100%;height:38px;margin-bottom:24px;"></div>
+        <div style="display:flex;justify-content:flex-end;gap:12px;">
+            <div class="sms-sk" style="width:150px;height:38px;border-radius:6px;"></div>
+            <div class="sms-sk" style="width:150px;height:38px;border-radius:6px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="global_container" style="display:none;">
 
     <div id="global_settings">
         <div id="settings" class="m100">

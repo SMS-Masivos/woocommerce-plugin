@@ -1,4 +1,53 @@
-<div id="global_container">
+<?php include SMS_PLUGIN_PATH . '/templates/skeleton.php'; ?>
+
+<div id="sms-skeleton" class="sms-skeleton-wrap" style="margin-top:75px;margin-left:100px;margin-right:100px;padding:20px;">
+    <div style="display:flex;gap:1.5%;margin-bottom:24px;">
+        <div style="flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;">
+            <div class="sms-sk" style="width:70%;height:16px;margin-bottom:8px;"></div>
+            <div class="sms-sk" style="width:50%;height:12px;margin-bottom:16px;"></div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;margin-bottom:12px;">
+                <div class="sms-sk" style="width:80px;height:22px;"></div>
+            </div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;">
+                <div class="sms-sk" style="width:40px;height:12px;"></div>
+            </div>
+        </div>
+        <div style="flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;">
+            <div class="sms-sk" style="width:85%;height:16px;margin-bottom:8px;"></div>
+            <div class="sms-sk" style="width:50%;height:12px;margin-bottom:16px;"></div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;margin-bottom:12px;">
+                <div class="sms-sk" style="width:80px;height:22px;"></div>
+            </div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;">
+                <div class="sms-sk" style="width:70px;height:14px;"></div>
+            </div>
+        </div>
+        <div style="flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;">
+            <div class="sms-sk" style="width:75%;height:16px;margin-bottom:8px;"></div>
+            <div class="sms-sk" style="width:45%;height:12px;margin-bottom:16px;"></div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;margin-bottom:12px;">
+                <div class="sms-sk" style="width:40px;height:22px;"></div>
+            </div>
+            <div style="border-top:1px solid #f0f0f0;padding-top:12px;">
+                <div class="sms-sk" style="width:70px;height:14px;"></div>
+            </div>
+        </div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;margin-bottom:20px;">
+        <div class="sms-sk" style="width:260px;height:22px;margin-bottom:8px;"></div>
+        <div class="sms-sk" style="width:80%;height:14px;"></div>
+    </div>
+    <div style="display:flex;gap:1.5%;">
+        <div style="flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;">
+            <div class="sms-sk" style="width:100%;height:200px;border-radius:8px;"></div>
+        </div>
+        <div style="flex:1;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:20px;">
+            <div class="sms-sk" style="width:100%;height:200px;border-radius:8px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="global_container" style="display:none;">
 <div id="revenue" class="m100">
       <div class="report">
         

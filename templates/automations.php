@@ -2,8 +2,69 @@
 <input id="userstatus" name="userstatus" type="hidden" value="<?php $user_meta = get_userdata(1); echo esc_attr($user_meta->roles[0]); ?>" readonly>
 <input id="isextensionactive" type="hidden" value="<?php echo esc_attr(is_plugin_active('woocommerce-abandoned-cart/woocommerce-ac.php')); ?>" readonly>
 
+<?php include SMS_PLUGIN_PATH . '/templates/skeleton.php'; ?>
 
-<div id="global_container">
+<div id="sms-skeleton" class="sms-skeleton-wrap" style="margin-top:75px;margin-left:100px;margin-right:100px;padding:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;margin-bottom:16px;border-bottom:1px solid #eee;">
+        <div class="sms-sk" style="width:140px;height:28px;"></div>
+        <div style="display:flex;gap:12px;">
+            <div class="sms-sk" style="width:100px;height:28px;"></div>
+            <div class="sms-sk" style="width:130px;height:34px;border-radius:20px;"></div>
+        </div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;margin-bottom:20px;">
+        <div class="sms-sk" style="width:55%;height:18px;margin-bottom:12px;"></div>
+        <div class="sms-sk" style="width:90%;height:14px;margin-bottom:20px;"></div>
+        <div style="display:flex;gap:20px;">
+            <div style="flex:1;">
+                <div class="sms-sk" style="width:60px;height:12px;margin-bottom:8px;"></div>
+                <div class="sms-sk" style="width:100%;height:36px;"></div>
+            </div>
+            <div style="flex:2;">
+                <div class="sms-sk" style="width:180px;height:12px;margin-bottom:8px;"></div>
+                <div class="sms-sk" style="width:100%;height:36px;"></div>
+            </div>
+        </div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <div class="sms-sk" style="width:140px;height:20px;"></div>
+            <div style="display:flex;gap:10px;">
+                <div class="sms-sk" style="width:160px;height:36px;border-radius:6px;"></div>
+                <div class="sms-sk" style="width:100px;height:36px;border-radius:6px;"></div>
+            </div>
+        </div>
+        <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0;">
+            <div class="sms-sk" style="width:30px;height:14px;"></div>
+            <div class="sms-sk" style="flex:2;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="width:60px;height:14px;"></div>
+            <div class="sms-sk" style="width:80px;height:14px;"></div>
+        </div>
+        <div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f0f0f0;">
+            <div class="sms-sk" style="width:30px;height:14px;"></div>
+            <div class="sms-sk" style="flex:2;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="width:60px;height:14px;"></div>
+            <div class="sms-sk" style="width:80px;height:14px;"></div>
+        </div>
+        <div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f0f0f0;">
+            <div class="sms-sk" style="width:30px;height:14px;"></div>
+            <div class="sms-sk" style="flex:2;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="flex:1;height:14px;"></div>
+            <div class="sms-sk" style="width:60px;height:14px;"></div>
+            <div class="sms-sk" style="width:80px;height:14px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="global_container" style="display:none;">
     <div id="global_automations">
 
       <nav class="navbar navbar-expand-lg">
