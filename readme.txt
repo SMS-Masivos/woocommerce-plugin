@@ -4,7 +4,7 @@ Tags: sms, woocommerce, notifications, whatsapp, mensajes
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 6.0.4
+Stable tag: 6.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,14 @@ El plugin soporta todos los estados de orden de WooCommerce: pendiente de pago, 
 Si, puedes personalizar los mensajes para cada estado de orden utilizando variables dinamicas como el nombre del cliente, numero de orden, total, entre otros.
 
 == Changelog ==
+
+= 6.1.0 =
+* Refactorizar archivos JS al patrón singleton con IIFE y sub-módulos
+* Agregar helpers compartidos sms-general.js y sms-request.js
+* Centralizar llamadas AJAX con wrapper _request.send()
+* Agregar skeleton screens con animación shimmer en todas las pantallas
+* Corregir alineación de cards en vista de ingresos (margin-bottom .central)
+* Eliminar imagen empty state de reportes
 
 = 6.0.4 =
 * Renombrar zip del release a nombre fijo sms-masivos.zip
